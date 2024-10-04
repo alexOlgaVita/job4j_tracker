@@ -4,10 +4,14 @@ public class Jukebox {
     public void music(int position) {
         String lyrics = "Песня не найдена";
         switch (position) {
-            case 1 -> lyrics = "Пусть бегут неуклюже";
-            case 2 -> lyrics = "Спокойной ночи";
-            default -> {
-            }
+            case 1:
+                lyrics = "Пусть бегут неуклюже";
+                break;
+            case 2:
+                lyrics = "Спокойной ночи";
+                break;
+            default:
+                break;
         }
         System.out.println(lyrics);
     }
