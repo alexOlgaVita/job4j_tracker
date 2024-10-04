@@ -22,6 +22,5 @@ public class Jukebox {
             System.out.print("position #" + i + ": ");
             jukebox.music(i);
         }
-
     }
 }
