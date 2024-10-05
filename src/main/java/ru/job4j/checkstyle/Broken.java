@@ -9,9 +9,9 @@ public class Broken {
 
     public static final String NEWVALUE = "";
 
-    void echo() { }
-
     Broken() { }
+
+    void echo() { }
 
     void media(Object obj) {
         if (obj != null) {
