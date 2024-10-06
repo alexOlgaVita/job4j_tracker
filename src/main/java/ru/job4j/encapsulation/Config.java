@@ -5,12 +5,12 @@ public class Config {
     private int position;
     private String[] properties;
 
-    private String search(String key) {
-        return key;
-    }
-
     public Config(String name) {
         this.name = name;
+    }
+
+    private String search(String key) {
+        return key;
     }
 
     public void print() {
