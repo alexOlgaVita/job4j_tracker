@@ -7,6 +7,17 @@ public class Tracker {
     private int ids = 1;
     private int size = 0;
 
+    private int indexOf(int id) {
+        int result = -1;
+        for (int index = 0; index < size; index++) {
+            if (items[index].getId() == id) {
+                result = index;
+                break;
+            }
+        }
+        return result;
+    }
+
     public Item add(Item item) {
         item.setId(ids++);
         items[size++] = item;
@@ -14,46 +25,32 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        Item rsl = null;
-        for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item != null) {
-                if (item.getId() == id) {
-                    rsl = item;
-                    break;
-                }
-            } else {
-                break;
-            }
-        }
-        return rsl;
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
     }
 
     public Item[] findByName(String key) {
         Item[] result = new Item[items.length];
-        int size = 0;
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
+        int sizeResult = 0;
+        for (int i = 0; i < size; i++) {
                 if (items[i].getName().equals(key)) {
-                    result[size++] = items[i];
+                    result[sizeResult++] = items[i];
                 }
-            } else {
-                break;
-            }
         }
-        return Arrays.copyOf(result, size);
+        return Arrays.copyOf(result, sizeResult);
     }
 
     public Item[] findAll() {
-        Item[] result = new Item[items.length];
-        int size = 0;
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                result[size++] = items[i];
-            } else {
-                break;
-            }
+        return Arrays.copyOf(items, size);
+    }
+
+    public boolean replace(int id, Item item) {
+        boolean result = false;
+        if (indexOf(id) != -1) {
+            items[indexOf(id)].setName(item.getName());
+            items[indexOf(id)].setId(id);
+            result = true;
         }
-        return Arrays.copyOf(result, size);
+        return result;
     }
 }
