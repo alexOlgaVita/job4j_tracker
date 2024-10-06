@@ -46,6 +46,7 @@ public class Tracker {
 
     public boolean replace(int id, Item item) {
         boolean result = false;
+        /* валидация выполнена */
         if (indexOf(id) != -1) {
             items[indexOf(id)].setName(item.getName());
             items[indexOf(id)].setId(id);
@@ -56,6 +57,7 @@ public class Tracker {
 
     public void delete(int id) {
         int i = indexOf(id);
+        /* валидация выполнена */
         if (i != -1) {
             System.arraycopy(items, i + 1, items, i, size - i - 1);
             items[size - 1] = null;
