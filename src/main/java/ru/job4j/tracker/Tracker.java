@@ -3,6 +3,8 @@ package ru.job4j.tracker;
 import java.util.Arrays;
 
 public class Tracker {
+    /* временный комментарий - доработанный код под дальнейшим заданиям с исправлениями своей прежней реализации выглядит так -
+     но старый коммит вроде нельзя ставить ссылку в выполненном задании, поэтому пишу тут */
     private final Item[] items = new Item[100];
     private int ids = 1;
     private int size = 0;
