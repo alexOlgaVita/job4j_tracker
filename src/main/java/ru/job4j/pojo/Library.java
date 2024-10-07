@@ -2,6 +2,7 @@ package ru.job4j.pojo;
 
 public class Library {
     public static void main(String[] args) {
+        String name = "Clean code";
         Book cleanArchitecture = new Book("Clean Architecture: A Craftsman's Guide to Software", 293);
         Book functionalDesign = new Book("Functional Design: Principles, Patterns, and Practices", 317);
         Book cleanCode = new Book("Clean code", 210);
@@ -27,7 +28,7 @@ public class Library {
         System.out.println("Книги только с названием = \"Clean code\"");
         for (int index = 0; index < books.length; index++) {
             Book book = books[index];
-            if (book.getName() == "Clean code") {
+            if (book.getName().equals(name)) {
                 System.out.println("\"" + book.getName() + "\", количество страниц: " + book.getPages());
             }
         }
