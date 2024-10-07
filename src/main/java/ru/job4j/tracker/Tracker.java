@@ -3,8 +3,6 @@ package ru.job4j.tracker;
 import java.util.Arrays;
 
 public class Tracker {
-    /* временный комментарий - доработанный код под дальнейшим заданиям с исправлениями своей прежней реализации выглядит так -
-     но старый коммит вроде нельзя ставить ссылку в выполненном задании, поэтому пишу тут */
     private final Item[] items = new Item[100];
     private int ids = 1;
     private int size = 0;
@@ -48,10 +46,11 @@ public class Tracker {
 
     public boolean replace(int id, Item item) {
         boolean result = false;
-        /* валидация выполнена */
-        if (indexOf(id) != -1) {
-            items[indexOf(id)].setName(item.getName());
-            items[indexOf(id)].setId(id);
+        int index = indexOf(id);
+        if (index != -1) {
+            Item itemNew = new Item(item.getName());
+            items[index] = itemNew;
+            items[index].setId(id);
             result = true;
         }
         return result;
