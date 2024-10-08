@@ -49,8 +49,8 @@ public class Tracker {
         boolean result = index != -1;
         /* поправлено здесь */
         if (result) {
+            item.setId(id);
             items[index] = item;
-            items[index].setId(id);
         }
         return result;
     }
