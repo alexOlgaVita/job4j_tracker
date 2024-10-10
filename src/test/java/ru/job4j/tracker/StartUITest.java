@@ -135,13 +135,12 @@ class StartUITest {
     }
 
     @Test
-    void whenSomeItemsFindByNameSuccessfully() {
+    void whenSomeItemsFindByName1From3Successfully() {
         Output output = new StubOutput();
         Tracker tracker = new Tracker();
-        Item[] items = new Item[3];
-        items[0] = tracker.add(new Item("Item1"));
-        items[1] = tracker.add(new Item("Item2"));
-        items[2] = tracker.add(new Item("Item1"));
+        Item one = tracker.add(new Item("Item1"));
+        tracker.add(new Item("Item2"));
+        tracker.add(new Item("Item3"));
         String foundName = "Item1";
         Input input = new MockInput(
                 new String[]{"0", foundName, "1"}
@@ -151,15 +150,42 @@ class StartUITest {
                 new ExitAction(output)
         };
         new StartUI(output).init(input, tracker, actions);
-        StringBuilder allItemsPrint = new StringBuilder();
-        allItemsPrint.append(tracker.findById(items[0].getId()).toString()).append(System.lineSeparator());
-        allItemsPrint.append(tracker.findById(items[2].getId()).toString()).append(System.lineSeparator());
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать заявки по имени" + System.lineSeparator()
                         + "1. Завершить программу" + System.lineSeparator()
                         + "=== Вывод заявок по имени ===" + System.lineSeparator()
-                        + allItemsPrint
+                        + one + System.lineSeparator()
+                        + "Меню:" + System.lineSeparator()
+                        + "0. Показать заявки по имени" + System.lineSeparator()
+                        + "1. Завершить программу" + System.lineSeparator()
+                        + "=== Завершение программы ===" + System.lineSeparator()
+        );
+    }
+
+    @Test
+    void whenSomeItemsFindByName2From3Successfully() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one  = tracker.add(new Item("Item1"));
+        tracker.add(new Item("Item2"));
+        Item two  = tracker.add(new Item("Item1"));
+        String foundName = "Item1";
+        Input input = new MockInput(
+                new String[]{"0", foundName, "1"}
+        );
+        UserAction[] actions = {
+                new FindByNameAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + System.lineSeparator()
+                        + "0. Показать заявки по имени" + System.lineSeparator()
+                        + "1. Завершить программу" + System.lineSeparator()
+                        + "=== Вывод заявок по имени ===" + System.lineSeparator()
+                        + one + System.lineSeparator()
+                        + two + System.lineSeparator()
                         + "Меню:" + System.lineSeparator()
                         + "0. Показать заявки по имени" + System.lineSeparator()
                         + "1. Завершить программу" + System.lineSeparator()
