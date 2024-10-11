@@ -9,6 +9,9 @@ public class UserStore {
                 break;
             }
         }
+        if (result == null) {
+            throw new UserNotFoundException("Пользователь с логином " + users[0].getUsername() + " не найден");
+        }
         return result;
     }
 
@@ -22,16 +25,10 @@ public class UserStore {
 
     public static void main(String[] args) {
         User[] users = {
-                new User("Petr Arsentev", true)
+                new User("Petr Arsentev", false)
         };
         try {
-            User user = findUser(users, "Pe");
-            if (user == null) {
-                throw new UserNotFoundException("Пользователь с логином " + users[0].getUsername() + " не найден");
-            }
-            if (validate(user)) {
-                System.out.println("This user has an access");
-            }
+            User user = findUser(users, "Petr Arsentev");
         } catch (UserInvalidException ea) {
             ea.printStackTrace();
         } catch (UserNotFoundException en) {
