@@ -5,6 +5,8 @@ public class Factorial {
         int result = 1;
         if (n > 1) {
                 result = calc(n - 1) * n;
+        } else if (n < 0) {
+            throw new IllegalArgumentException("Number could not be less than 0");
         }
         return result;
     }
