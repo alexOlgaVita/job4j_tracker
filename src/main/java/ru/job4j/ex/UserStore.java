@@ -25,7 +25,7 @@ public class UserStore {
 
     public static void main(String[] args) {
         User[] users = {
-                new User("Petr Arsentev", false)
+                new User("Petr Arsentev", true)
         };
         try {
             User user = findUser(users, "Petr Arsentev");
