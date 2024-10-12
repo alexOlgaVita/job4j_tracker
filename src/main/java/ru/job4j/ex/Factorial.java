@@ -2,13 +2,12 @@ package ru.job4j.ex;
 
 public class Factorial {
     public static int calc(int n) {
-        int result = 1;
-        if (n > 1) {
-                result = calc(n - 1) * n;
-        } else if (n < 0) {
-            throw new IllegalArgumentException("Number could not be less than 0");
+        if (n == 0 || n == 1) {
+            return 1;
+        } else if (n > 1) {
+            return calc(n - 1) * n;
         }
-        return result;
+        throw new IllegalArgumentException("Number could not be less than 0");
     }
 
     public static void main(String[] args) {
