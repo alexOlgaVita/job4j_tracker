@@ -21,7 +21,7 @@ class StartUITest {
                 new CreateAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(tracker.findAll()[0].getName()).isEqualTo("Item name");
     }
 
@@ -38,7 +38,7 @@ class StartUITest {
                 new ReplaceAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(tracker.findById(item.getId()).getName()).isEqualTo(replacedName);
     }
 
@@ -54,7 +54,7 @@ class StartUITest {
                 new DeleteAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(tracker.findById(item.getId())).isNull();
     }
 
@@ -68,7 +68,7 @@ class StartUITest {
         UserAction[] actions = {
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Завершить программу" + System.lineSeparator()
@@ -91,7 +91,7 @@ class StartUITest {
                 new FindAllAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         StringBuilder allItemsPrint = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             allItemsPrint.append(tracker.findById(items[i].getId()).toString()).append(System.lineSeparator());
@@ -120,7 +120,7 @@ class StartUITest {
                 new FindAllAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать все заявки" + System.lineSeparator()
@@ -149,7 +149,7 @@ class StartUITest {
                 new FindByNameAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать заявки по имени" + System.lineSeparator()
@@ -178,7 +178,7 @@ class StartUITest {
                 new FindByNameAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать заявки по имени" + System.lineSeparator()
@@ -208,7 +208,7 @@ class StartUITest {
                 new FindByNameAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать заявки по имени" + System.lineSeparator()
@@ -234,7 +234,7 @@ class StartUITest {
                 new FindByNameAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать заявки по имени" + System.lineSeparator()
@@ -264,7 +264,7 @@ class StartUITest {
                 new FindByIdAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать заявку по id" + System.lineSeparator()
@@ -294,7 +294,7 @@ class StartUITest {
                 new FindByIdAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать заявку по id" + System.lineSeparator()
@@ -320,7 +320,7 @@ class StartUITest {
                 new FindByIdAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
                         + "0. Показать заявку по id" + System.lineSeparator()
@@ -344,7 +344,7 @@ class StartUITest {
         UserAction[] actions = new UserAction[]{
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions, output);
+        new StartUI(output).init(input, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + ln
