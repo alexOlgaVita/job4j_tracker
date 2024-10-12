@@ -6,8 +6,6 @@ import ru.job4j.tracker.input.ValidateInput;
 import ru.job4j.tracker.output.ConsoleOutput;
 import ru.job4j.tracker.output.Output;
 
-import static java.lang.System.out;
-
 public class StartUI {
     private final Output output;
 
@@ -22,13 +20,13 @@ public class StartUI {
         }
     }
 
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Tracker tracker, UserAction[] actions, Output output) {
         boolean run = true;
         while (run) {
             showMenu(actions);
             int select = input.askInt("Выбрать: ");
             if (select < 0 || select >= actions.length) {
-                out.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
+                output.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
                 continue;
             }
             UserAction action = actions[select];
@@ -49,6 +47,6 @@ public class StartUI {
                 new FindByNameAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions);
+        new StartUI(output).init(input, tracker, actions, output);
     }
 }
