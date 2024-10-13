@@ -30,25 +30,30 @@ public class PasswordValidator {
         if (password.length() < 8 || password.length() > 32) {
             throw new IllegalArgumentException("Password should be length [8, 32]");
         }
-        int i = 0;
-        do {
-            if (password.toLowerCase().contains(FORBIDDEN[i])) {
+        for (String forbiddenWord:FORBIDDEN) {
+            if (password.toLowerCase().contains(forbiddenWord)) {
                 throw new IllegalArgumentException(
                         "Password shouldn't contain substrings: qwerty, 12345, password, admin, user");
             }
-            i++;
         }
-        while (i < FORBIDDEN.length);
         boolean hasUpCase = false;
         boolean hasLowCase = false;
         boolean hasDigit = false;
         boolean hasSpecial = false;
         for (char symbol : password.toCharArray()) {
             /* Блок проверки принадлежности символа к определенной группе - Character.is ... */
-            hasUpCase = (!hasUpCase) ? Character.isUpperCase(symbol) : hasUpCase;
-            hasLowCase = (!hasLowCase) ? Character.isLowerCase(symbol) : hasLowCase;
-            hasDigit = (!hasDigit) ? Character.isDigit(symbol) : hasDigit;
-            hasSpecial = (!hasSpecial) ? (!Character.isDigit(symbol) && !Character.isAlphabetic(symbol)) : hasSpecial;
+            if (!hasUpCase) {
+                hasUpCase = Character.isUpperCase(symbol);
+            }
+            if (!hasLowCase) {
+                hasLowCase = Character.isLowerCase(symbol);
+            }
+            if (!hasDigit) {
+                hasDigit = Character.isDigit(symbol);
+            }
+            if (!hasSpecial) {
+                hasSpecial = !Character.isDigit(symbol) && !Character.isAlphabetic(symbol);
+            }
         }
         if (!hasUpCase) {
             throw new IllegalArgumentException(
