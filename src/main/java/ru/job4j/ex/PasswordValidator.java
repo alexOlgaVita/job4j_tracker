@@ -41,7 +41,6 @@ public class PasswordValidator {
         boolean hasDigit = false;
         boolean hasSpecial = false;
         for (char symbol : password.toCharArray()) {
-            /* Блок проверки принадлежности символа к определенной группе - Character.is ... */
             if (!hasUpCase) {
                 hasUpCase = Character.isUpperCase(symbol);
             }
@@ -53,6 +52,9 @@ public class PasswordValidator {
             }
             if (!hasSpecial) {
                 hasSpecial = !Character.isDigit(symbol) && !Character.isAlphabetic(symbol);
+            }
+            if (hasUpCase && hasLowCase && hasDigit && hasSpecial) {
+                break;
             }
         }
         if (!hasUpCase) {
