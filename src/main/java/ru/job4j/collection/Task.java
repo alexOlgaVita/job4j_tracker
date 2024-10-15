@@ -13,7 +13,6 @@ public class Task {
         return number;
     }
 
-    // Включите этот метод, если понадобится описание задачи
     public String getDescription() {
         return description;
     }
