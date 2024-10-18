@@ -35,8 +35,7 @@ public class AnalyzeByMap {
         List<Label>  listResult = new ArrayList<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                subjMap.putIfAbsent(subject.getname(), 0);
-                subjMap.put(subject.getname(), subjMap.get(subject.getname()) + subject.getScore());
+                subjMap.put(subject.getname(), subjMap.getOrDefault(subject.getname(), 0) + subject.getScore());
             }
         }
         for (Map.Entry<String, Integer> entry : subjMap.entrySet()) {
@@ -63,8 +62,7 @@ public class AnalyzeByMap {
         List<Label>  listResult = new ArrayList<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                subjMap.putIfAbsent(subject.getname(), 0);
-                subjMap.put(subject.getname(), subjMap.get(subject.getname()) + subject.getScore());
+                subjMap.put(subject.getname(), subjMap.getOrDefault(subject.getname(), 0) + subject.getScore());
             }
         }
         for (Map.Entry<String, Integer> entry : subjMap.entrySet()) {
