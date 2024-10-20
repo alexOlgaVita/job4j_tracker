@@ -1,11 +1,10 @@
-package queue;
+package ru.job4j.queue;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.Comparator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static queue.Position.*;
+import static ru.job4j.queue.Position.*;
 
 class ScheduleTaskTest {
     @Test
