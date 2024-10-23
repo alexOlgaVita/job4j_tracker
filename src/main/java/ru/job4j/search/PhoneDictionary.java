@@ -21,11 +21,10 @@ public class PhoneDictionary {
         Predicate<Person> namePredicate = (person) -> (person.getName().contains(key));
         Predicate<Person> addressPredicate = (person) -> (person.getAddress().contains(key));
         Predicate<Person> surnamePredicate = (person) -> (person.getSurname().contains(key));
-        Predicate<Person> combine = (person) -> (phonePredicate
+        Predicate<Person> combine = (phonePredicate
                 .or(namePredicate)
                 .or(addressPredicate)
                 .or(surnamePredicate)
-                .test(person)
         );
         ArrayList<Person> result = new ArrayList<>();
         for (Person person : persons) {
