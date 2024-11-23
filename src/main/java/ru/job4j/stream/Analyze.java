@@ -48,6 +48,7 @@ public class Analyze {
                 .orElse(null);
     }
 
+    /* коммент - для отправки коммита: изменение было сдалено давно, затерялось, наверое, в другом коммите */
     public static Tuple bestSubject(Stream<Pupil> stream) {
         return stream.flatMap(pupil -> pupil.subjects().stream())
                 .collect(Collectors.groupingBy(Subject::name, Collectors.summingDouble(Subject::score)))
