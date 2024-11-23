@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import static java.time.LocalDateTime.now;
 
@@ -57,5 +58,28 @@ public class Item {
 
     public LocalDateTime getCreated() {
         return created;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 17;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + id;
+        result = prime * result + created.truncatedTo(ChronoUnit.MILLIS).hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Item item = (Item) obj;
+        return (id == item.id) && (name.equals(item.name))
+                && (created.truncatedTo(ChronoUnit.MILLIS).equals(item.created.truncatedTo(ChronoUnit.MILLIS)));
     }
 }
