@@ -52,7 +52,7 @@ public class SqlTracker implements Store {
     @Override
     public Item add(Item item) {
         try (PreparedStatement statement =
-                     connection.prepareStatement("INSERT INTO items(name, created) VALUES (?, ?)",
+                     connection.prepareStatement("INSERT INTO items(name, text, link, created) VALUES (?, ?)",
                              Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
