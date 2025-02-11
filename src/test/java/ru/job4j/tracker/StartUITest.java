@@ -243,7 +243,6 @@ class StartUITest {
         );
     }
 
-
     @Test
     void whenSomeItemsFindByName2From3Successfully() {
         Output output = new StubOutput();
