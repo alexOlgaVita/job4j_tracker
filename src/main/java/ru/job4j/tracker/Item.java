@@ -1,15 +1,14 @@
 package ru.job4j.tracker;
 
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import ru.job4j.toone.User;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.time.LocalDateTime.now;
 
@@ -27,6 +26,14 @@ public class Item {
     private String name;
 
     private LocalDateTime created = now();
+
+    @ManyToMany
+    @JoinTable(
+            name = "participates",
+            joinColumns = {@JoinColumn(name = "item_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private List<User> participates = new ArrayList<>();
 
     public Item() {
     }
