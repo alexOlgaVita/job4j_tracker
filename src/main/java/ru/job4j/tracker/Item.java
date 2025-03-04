@@ -27,7 +27,7 @@ public class Item {
 
     private LocalDateTime created = now();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "participates",
             joinColumns = {@JoinColumn(name = "item_id")},
