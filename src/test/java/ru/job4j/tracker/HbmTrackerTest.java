@@ -81,7 +81,6 @@ class HbmTrackerTest {
     }
 
     @Test
-    //@Transactional
     public void whenTestNotSameNamesFindByNameThenEmpty() {
         Store tracker = new HbmTracker();
         Item first = new Item("First");
