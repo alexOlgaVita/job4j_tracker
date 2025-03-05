@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,7 +60,7 @@ class HbmTrackerTest {
         tracker.add(second);
         var expectedList = List.of(first, second);
         assertThat(tracker.findAll()).usingRecursiveComparison()
-                .ignoringFields("id", "created").isEqualTo(expectedList);
+                .ignoringFields("id", "created", "participates").isEqualTo(expectedList);
     }
 
     @Test
@@ -76,10 +77,11 @@ class HbmTrackerTest {
         tracker.add(fourth);
         var expectedList = List.of(first, third, fourth);
         assertThat(tracker.findByName(first.getName())).usingRecursiveComparison()
-                .ignoringFields("id", "created").isEqualTo(expectedList);
+                .ignoringFields("id", "created", "participates").isEqualTo(expectedList);
     }
 
     @Test
+    //@Transactional
     public void whenTestNotSameNamesFindByNameThenEmpty() {
         Store tracker = new HbmTracker();
         Item first = new Item("First");
