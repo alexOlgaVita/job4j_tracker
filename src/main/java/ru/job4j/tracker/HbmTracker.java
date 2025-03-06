@@ -82,12 +82,9 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public List<Item> findByName(String key) {
         Session session = sf.openSession();
-        /*
         Query<Item> query = session.createQuery(
                 "from Item i JOIN FETCH i.participates where i.name = :fkey", Item.class);
-         */
-        Query<Item> query = session.createQuery(
-                "from Item i where i.name = :fkey", Item.class);
+
         query.setParameter("fkey", key);
         List<Item> result = query.getResultList();
         session.close();

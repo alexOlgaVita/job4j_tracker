@@ -3,8 +3,10 @@ package ru.job4j.tracker;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.job4j.toone.Role;
+import ru.job4j.toone.User;
 
-import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +29,18 @@ class HbmTrackerTest {
             for (var item : items) {
                 tracker.delete(item.getId());
             }
-            tracker.findAll();
+        }
+
+        var hbmUser = new HbmUser();
+        var users = hbmUser.findAll();
+        for (var user : users) {
+            hbmUser.delete(user.getId());
+        }
+
+        var roleStore = new HbmRole();
+        var roles = roleStore.findAll();
+        for (var role : roles) {
+            roleStore.delete(role.getId());
         }
     }
 
@@ -66,16 +79,33 @@ class HbmTrackerTest {
     @Test
     public void whenTest3SameNamesFindByNameThen3() {
         Store tracker = new HbmTracker();
-        Item first = new Item("First");
-        Item second = new Item("Second");
+
+        Role role = new Role(null, "Admin");
+        HbmRole hbmRole = new HbmRole();
+        hbmRole.add(role);
+        User user1 = new User(null, "user1", role, null);
+        HbmUser hbmUser = new HbmUser();
+        hbmUser.add(user1);
+
+        User user2 = new User(null, "user2", role, null);
+        hbmUser.add(user2);
+
+        User user3 = new User(null, "user3", role, null);
+        hbmUser.add(user3);
+
+        List<User> participates1 = List.of(user1, user2);
+        List<User> participates2 = List.of(user1, user3);
+
+        Item first = new Item(null, "First", LocalDateTime.now(), participates1);
+        Item second = new Item(null, "Second", LocalDateTime.now(), participates2);
         tracker.add(first);
         tracker.add(second);
-        Item third = new Item("First");
+        Item third = new Item(null, "First", LocalDateTime.now(), participates1);
         tracker.add(third);
-        tracker.add(new Item("Second"));
-        Item fourth = new Item("First");
+        tracker.add(new Item(null, "Second", LocalDateTime.now(), participates2));
+        Item fourth = new Item(null, "First", LocalDateTime.now(), participates1);
         tracker.add(fourth);
-        var expectedList = List.of(first, third, fourth);
+        var expectedList = List.of(first, first, third, third, fourth, fourth);
         assertThat(tracker.findByName(first.getName())).usingRecursiveComparison()
                 .ignoringFields("id", "created", "participates").isEqualTo(expectedList);
     }
