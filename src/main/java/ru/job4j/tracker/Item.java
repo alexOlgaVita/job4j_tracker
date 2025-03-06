@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import lombok.Data;
+import lombok.*;
 import ru.job4j.toone.User;
 
 import javax.persistence.*;
@@ -14,14 +14,17 @@ import static java.time.LocalDateTime.now;
 
 @Entity
 @Table(name = "items")
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Item {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -34,9 +37,6 @@ public class Item {
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
     private List<User> participates = new ArrayList<>();
-
-    public Item() {
-    }
 
     public Item(String name) {
         this.name = name;

@@ -1,20 +1,23 @@
 package ru.job4j.toone;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.EqualsAndHashCode.Include;
+
 import javax.persistence.*;
 
-@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "j_role")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Include
-    private int id;
+    private Integer id;
 
     private String name;
 }
